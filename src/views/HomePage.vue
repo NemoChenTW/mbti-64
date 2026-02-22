@@ -67,7 +67,7 @@ import { dimensions } from '../data/dimensionInfo.js'
 .hero {
   text-align: center;
   padding: var(--space-16) 0 var(--space-12);
-  background: linear-gradient(180deg, #eef2ff 0%, var(--color-bg) 100%);
+  background: linear-gradient(180deg, #FFF0E0 0%, var(--color-bg) 100%);
 }
 
 .hero-title {
@@ -198,7 +198,7 @@ import { dimensions } from '../data/dimensionInfo.js'
 }
 
 .cta-inner .btn-primary:hover {
-  background: #f0f0f0;
+  background: #FFF0E0;
 }
 
 /* RWD */
