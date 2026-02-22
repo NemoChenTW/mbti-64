@@ -9,11 +9,11 @@
         {{ dimension.right.label }} {{ dimension.right.code }}
       </span>
     </div>
-    <div class="bar-track">
+    <div class="bar-track" :class="{ 'fill-right': percentage < 50 }">
       <div
         class="bar-fill"
         :style="{
-          width: percentage + '%',
+          width: (percentage >= 50 ? percentage : 100 - percentage) + '%',
           background: dimension.color,
         }"
       ></div>
@@ -62,11 +62,16 @@ defineProps({
 }
 
 .bar-track {
+  display: flex;
   width: 100%;
   height: 12px;
   background: var(--color-surface-alt);
   border-radius: var(--radius-full);
   overflow: hidden;
+}
+
+.bar-track.fill-right {
+  justify-content: flex-end;
 }
 
 .bar-fill {
