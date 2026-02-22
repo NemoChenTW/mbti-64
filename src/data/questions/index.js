@@ -9,15 +9,21 @@
  */
 import officeQuestions from './office.js'
 import studentQuestions from './student.js'
+import homemakerQuestions from './homemaker.js'
+import freelancerQuestions from './freelancer.js'
 
 export const personas = [
   { id: 'office', label: '上班族', description: '適合有工作經驗的職場人士', icon: '💼' },
   { id: 'student', label: '學生', description: '適合國高中生與大學生', icon: '📚' },
+  { id: 'homemaker', label: '家庭主婦', description: '適合全職照顧家庭的人', icon: '🏠' },
+  { id: 'freelancer', label: '自由工作者', description: '適合接案、遠距工作的獨立工作者', icon: '💻' },
 ]
 
 const personaQuestions = {
   office: officeQuestions,
   student: studentQuestions,
+  homemaker: homemakerQuestions,
+  freelancer: freelancerQuestions,
 }
 
 export function getQuestionsByPersona(personaId) {

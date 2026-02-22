@@ -40,6 +40,15 @@ export function useQuiz() {
     }
   }
 
+  const canGoBack = computed(() => currentIndex.value > 0)
+
+  function goBack() {
+    if (currentIndex.value > 0) {
+      answers.value.pop()
+      currentIndex.value--
+    }
+  }
+
   function reset() {
     answers.value = []
     currentIndex.value = 0
@@ -62,6 +71,8 @@ export function useQuiz() {
     selectedPersona,
     selectPersona,
     answerQuestion,
+    canGoBack,
+    goBack,
     reset,
     scores,
     typeCode,

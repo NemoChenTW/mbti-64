@@ -24,7 +24,9 @@
               :question="currentQuestion"
               :total="totalQuestions"
               :current="currentIndex"
+              :canGoBack="canGoBack"
               @answer="handleAnswer"
+              @back="goBack"
             />
           </transition>
         </div>
@@ -51,6 +53,8 @@ const {
   selectedPersona,
   selectPersona,
   answerQuestion,
+  canGoBack,
+  goBack,
   reset,
 } = useQuiz()
 

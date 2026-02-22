@@ -12,6 +12,9 @@
         <span class="option-text">{{ question.optionB }}</span>
       </button>
     </div>
+    <button v-if="canGoBack" class="prev-btn" @click="$emit('back')">
+      &larr; 上一題
+    </button>
   </div>
 </template>
 
@@ -20,9 +23,10 @@ defineProps({
   question: { type: Object, required: true },
   total: { type: Number, required: true },
   current: { type: Number, required: true },
+  canGoBack: { type: Boolean, default: false },
 })
 
-const emit = defineEmits(['answer'])
+const emit = defineEmits(['answer', 'back'])
 
 function handleAnswer(event, choice) {
   event.currentTarget.blur()
@@ -117,5 +121,20 @@ function handleAnswer(event, choice) {
 
 .option-text {
   line-height: 1.5;
+}
+
+.prev-btn {
+  margin-top: var(--space-6);
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  padding: var(--space-2) var(--space-3);
+  transition: color var(--transition-fast);
+}
+
+.prev-btn:hover {
+  color: var(--color-primary);
 }
 </style>
