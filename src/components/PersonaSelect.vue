@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { personas } from '../data/questions.js'
+import { personas } from '../data/questions/index.js'
 
 defineEmits(['select'])
 </script>

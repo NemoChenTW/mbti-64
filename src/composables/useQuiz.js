@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { questions, personas } from '../data/questions.js'
+import { personas, getQuestionsByPersona } from '../data/questions/index.js'
 import { calculateScores, getTypeCode, getDimensionPercentages } from '../utils/scoring.js'
 
 // 單例狀態
@@ -10,7 +10,7 @@ const selectedPersona = ref(null)
 export function useQuiz() {
   const filteredQuestions = computed(() => {
     if (!selectedPersona.value) return []
-    return questions.filter(q => q.persona === selectedPersona.value)
+    return getQuestionsByPersona(selectedPersona.value)
   })
 
   const totalQuestions = computed(() => filteredQuestions.value.length)
@@ -52,7 +52,6 @@ export function useQuiz() {
 
   return {
     personas,
-    questions,
     filteredQuestions,
     answers,
     currentIndex,
