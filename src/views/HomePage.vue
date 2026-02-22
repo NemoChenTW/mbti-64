@@ -13,6 +13,9 @@
           開始測驗
         </router-link>
         <p class="hero-meta">約 5 分鐘</p>
+        <router-link to="/lookup" class="lookup-link">
+          已知道類型？快速查詢
+        </router-link>
       </div>
     </section>
 
@@ -95,6 +98,19 @@ import { dimensions } from '../data/dimensionInfo.js'
   margin-top: var(--space-4);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
+}
+
+.lookup-link {
+  display: inline-block;
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lookup-link:hover {
+  color: var(--color-primary);
 }
 
 /* 介紹區塊 */

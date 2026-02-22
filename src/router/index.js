@@ -12,6 +12,11 @@ const routes = [
     component: () => import('../views/QuizPage.vue'),
   },
   {
+    path: '/lookup',
+    name: 'Lookup',
+    component: () => import('../views/LookupPage.vue'),
+  },
+  {
     path: '/result/:code',
     name: 'Result',
     component: () => import('../views/ResultPage.vue'),
