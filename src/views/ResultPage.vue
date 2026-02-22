@@ -8,6 +8,7 @@
           :strengths="typeInfo.strengths"
           :weaknesses="typeInfo.weaknesses"
         />
+        <PersonalityDetail :typeInfo="typeInfo" />
         <div class="result-actions">
           <button class="btn btn-primary btn-lg" @click="retake">
             重新測驗
@@ -38,6 +39,7 @@ import { useQuiz } from '../composables/useQuiz.js'
 import ResultCard from '../components/ResultCard.vue'
 import DimensionChart from '../components/DimensionChart.vue'
 import StrengthWeakness from '../components/StrengthWeakness.vue'
+import PersonalityDetail from '../components/PersonalityDetail.vue'
 
 const route = useRoute()
 const router = useRouter()
