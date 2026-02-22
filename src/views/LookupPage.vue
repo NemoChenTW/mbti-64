@@ -62,8 +62,8 @@ const selected = reactive({
   SN: null,
   TF: null,
   JP: null,
-  AT: null,
-  CS: null,
+  AO: null,
+  HC: null,
 })
 
 const allSelected = computed(() =>
@@ -75,7 +75,7 @@ function goToResult() {
   const code =
     selected.EI + selected.SN + selected.TF + selected.JP +
     '-' +
-    selected.AT + selected.CS
+    selected.AO + selected.HC
   router.push(`/result/${code}`)
 }
 </script>

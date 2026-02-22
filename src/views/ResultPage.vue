@@ -80,8 +80,8 @@ const displayPercentages = computed(() => {
     SN: base[1] === 'S' ? 65 : 35,
     TF: base[2] === 'T' ? 65 : 35,
     JP: base[3] === 'J' ? 65 : 35,
-    AT: ext[0] === 'A' ? 65 : 35,
-    CS: ext[1] === 'C' ? 65 : 35,
+    AO: ext[0] === 'A' ? 65 : 35,
+    HC: ext[1] === 'H' ? 65 : 35,
   }
 })
 

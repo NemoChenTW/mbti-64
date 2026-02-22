@@ -4,7 +4,7 @@ A Vue.js MBTI personality test with 6 dimensions and scenario-based questions ta
 
 ## Features
 
-- **6 personality dimensions**: EI, SN, TF, JP, AT, CS (7 questions each, 42 total)
+- **6 personality dimensions**: EI, SN, TF, JP, AO, HC (7 questions each, 42 total)
 - **Multiple personas**: Questions adapted to different life contexts — office worker, student, homemaker, freelancer
 - **Scenario-based design**: Each question places you in a concrete situation and asks about your inner reaction, not just behavior
 - **Quick lookup**: Already know your type? Jump straight to detailed results

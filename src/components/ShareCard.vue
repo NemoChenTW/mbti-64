@@ -73,8 +73,8 @@ const dimColors = {
   SN: '#F0A040',
   TF: '#7BC0C8',
   JP: '#C4A0D8',
-  AT: '#F08080',
-  CS: '#F5C84C',
+  AO: '#F08080',
+  HC: '#F5C84C',
 }
 
 defineExpose({ cardRef })
