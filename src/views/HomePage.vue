@@ -12,7 +12,7 @@
         <router-link to="/quiz" class="btn btn-primary btn-lg">
           開始測驗
         </router-link>
-        <p class="hero-meta">30 題 &#x00B7; 約 5 分鐘</p>
+        <p class="hero-meta">約 5 分鐘</p>
       </div>
     </section>
 

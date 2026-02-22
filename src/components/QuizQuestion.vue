@@ -1,6 +1,6 @@
 <template>
   <div class="quiz-question">
-    <p class="question-number">第 {{ question.id }} / {{ total }} 題</p>
+    <p class="question-number">第 {{ current + 1 }} / {{ total }} 題</p>
     <h2 class="question-text">{{ question.text }}</h2>
     <div class="options">
       <button class="option-btn" @click="$emit('answer', 'A')">
@@ -19,6 +19,7 @@
 defineProps({
   question: { type: Object, required: true },
   total: { type: Number, required: true },
+  current: { type: Number, required: true },
 })
 
 defineEmits(['answer'])
