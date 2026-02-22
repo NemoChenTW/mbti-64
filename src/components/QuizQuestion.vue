@@ -3,11 +3,11 @@
     <p class="question-number">第 {{ current + 1 }} / {{ total }} 題</p>
     <h2 class="question-text">{{ question.text }}</h2>
     <div class="options">
-      <button class="option-btn" @click="$emit('answer', 'A')">
+      <button class="option-btn" @click="handleAnswer($event, 'A')">
         <span class="option-label">A</span>
         <span class="option-text">{{ question.optionA }}</span>
       </button>
-      <button class="option-btn" @click="$emit('answer', 'B')">
+      <button class="option-btn" @click="handleAnswer($event, 'B')">
         <span class="option-label">B</span>
         <span class="option-text">{{ question.optionB }}</span>
       </button>
@@ -22,7 +22,12 @@ defineProps({
   current: { type: Number, required: true },
 })
 
-defineEmits(['answer'])
+const emit = defineEmits(['answer'])
+
+function handleAnswer(event, choice) {
+  event.currentTarget.blur()
+  emit('answer', choice)
+}
 </script>
 
 <style scoped>
@@ -67,10 +72,29 @@ defineEmits(['answer'])
   box-shadow: var(--shadow-sm);
 }
 
-.option-btn:hover {
+@media (hover: hover) {
+  .option-btn:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .option-btn:hover .option-label {
+    background: var(--color-primary);
+    color: white;
+  }
+}
+
+.option-btn:focus-visible {
   border-color: var(--color-primary);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.option-btn:focus-visible .option-label {
+  background: var(--color-primary);
+  color: white;
 }
 
 .option-btn:active {
@@ -89,11 +113,6 @@ defineEmits(['answer'])
   font-weight: 700;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-}
-
-.option-btn:hover .option-label {
-  background: var(--color-primary);
-  color: white;
 }
 
 .option-text {
