@@ -47,7 +47,7 @@
     <section class="cta">
       <div class="container cta-inner">
         <h2>準備好了嗎？</h2>
-        <p>回答 30 個簡單問題，找出你的 MBTI-64 人格類型。</p>
+        <p>回答 42 個簡單問題，找出你的 MBTI-64 人格類型。</p>
         <router-link to="/quiz" class="btn btn-primary btn-lg">
           開始測驗
         </router-link>
