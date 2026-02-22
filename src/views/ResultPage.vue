@@ -13,8 +13,12 @@
           <button class="btn btn-primary btn-lg" @click="retake">
             重新測驗
           </button>
-          <button class="btn btn-outline" @click="share">
-            分享結果
+          <button
+            class="btn btn-outline"
+            :disabled="isSharing"
+            @click="share"
+          >
+            {{ isSharing ? '產生中...' : '分享結果' }}
           </button>
         </div>
       </template>
@@ -28,11 +32,20 @@
         </div>
       </template>
     </div>
+
+    <!-- Hidden ShareCard for screenshot -->
+    <ShareCard
+      v-if="typeInfo"
+      ref="shareCardRef"
+      :typeInfo="typeInfo"
+      :percentages="displayPercentages"
+      class="share-card-hidden"
+    />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { typeDescriptions } from '../data/typeDescriptions.js'
 import { useQuiz } from '../composables/useQuiz.js'
@@ -40,10 +53,14 @@ import ResultCard from '../components/ResultCard.vue'
 import DimensionChart from '../components/DimensionChart.vue'
 import StrengthWeakness from '../components/StrengthWeakness.vue'
 import PersonalityDetail from '../components/PersonalityDetail.vue'
+import ShareCard from '../components/ShareCard.vue'
 
 const route = useRoute()
 const router = useRouter()
 const { percentages, reset } = useQuiz()
+
+const shareCardRef = ref(null)
+const isSharing = ref(false)
 
 const code = computed(() => route.params.code)
 const typeInfo = computed(() => typeDescriptions[code.value] || null)
@@ -73,15 +90,50 @@ function retake() {
   router.push('/quiz')
 }
 
-function share() {
-  const text = `我的 MBTI-64 人格類型是 ${code.value}「${typeInfo.value.name}」！來測測你的吧！`
-  const url = window.location.href
+async function share() {
+  if (isSharing.value) return
+  isSharing.value = true
 
-  if (navigator.share) {
-    navigator.share({ title: 'MBTI-64 人格測驗', text, url })
-  } else {
-    navigator.clipboard.writeText(`${text}\n${url}`)
-    alert('結果已複製到剪貼簿！')
+  try {
+    const { default: html2canvas } = await import('html2canvas-pro')
+    const el = shareCardRef.value?.cardRef
+    if (!el) throw new Error('ShareCard element not found')
+
+    const canvas = await html2canvas(el, {
+      width: 1080,
+      height: 1080,
+      scale: 1,
+      useCORS: true,
+      backgroundColor: '#FFF8F0',
+    })
+
+    const blob = await new Promise((resolve) =>
+      canvas.toBlob(resolve, 'image/png')
+    )
+
+    const fileName = `mbti-64-${code.value}.png`
+    const file = new File([blob], fileName, { type: 'image/png' })
+
+    if (navigator.canShare?.({ files: [file] })) {
+      await navigator.share({ files: [file] })
+    } else {
+      // Fallback: trigger download
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = fileName
+      a.click()
+      URL.revokeObjectURL(url)
+    }
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      // User cancelled the share dialog — ignore
+    } else {
+      console.error('Share failed:', err)
+      alert('分享失敗，請稍後再試。')
+    }
+  } finally {
+    isSharing.value = false
   }
 }
 </script>
@@ -117,5 +169,11 @@ function share() {
 .not-found p {
   margin-bottom: var(--space-6);
   color: var(--color-text-secondary);
+}
+
+.share-card-hidden {
+  position: fixed;
+  left: -9999px;
+  top: 0;
 }
 </style>
